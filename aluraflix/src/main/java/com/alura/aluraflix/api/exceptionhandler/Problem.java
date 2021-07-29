@@ -1,6 +1,7 @@
 package com.alura.aluraflix.api.exceptionhandler;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -17,5 +18,6 @@ public class Problem {
 	private OffsetDateTime timestamp;
 	private String title;
 	private String detail;
+	private List<Field> fields;
 
 }

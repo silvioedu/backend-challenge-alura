@@ -1,3 +1,13 @@
-# backend-challenge-alura
+# Backend Challeng Alura - Aluraflix
 
-docker container run -d -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes --name aluraflix mysql
+## Desafio
+
+O Desafio é criar uma aplicação backend para comportar um listador de vídeos chamado Aluraflix.
+
+## Cards Trello
+
+- Semana 1:
+https://trello.com/b/Mj5x6lMZ/alura-challenge-backend-semana-1
+
+- Semana 2:
+https://trello.com/b/5DavhAH7/alura-challenge-backend-semana-2

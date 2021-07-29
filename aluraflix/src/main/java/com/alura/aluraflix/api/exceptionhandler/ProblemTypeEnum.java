@@ -5,7 +5,11 @@ import lombok.Getter;
 @Getter
 public enum ProblemTypeEnum {
     
-    NOT_FOUND("Registro não encontrado");
+
+    IN_USE("Registro em uso"),
+    INVALID_DATA("Dados inválidos"),
+    NOT_FOUND("Registro não encontrado")
+    ;
 
     private String title;
 

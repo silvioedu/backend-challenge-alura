@@ -5,52 +5,52 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alura.aluraflix.api.model.VideoModel;
-import com.alura.aluraflix.domain.model.Video;
-import com.alura.aluraflix.domain.model.VideoExample;
+import com.alura.aluraflix.api.model.CategoriaModel;
+import com.alura.aluraflix.domain.model.Categoria;
+import com.alura.aluraflix.domain.model.CategoriaExample;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VideoModelAssemblerTest {
+class CategoriaModelAssemblerTest {
     
     @Autowired
-    private VideoModelAssembler assembler;
+    private CategoriaModelAssembler assembler;
 
     @Test
-    void shouldConvertVideo_inVideoModel() {
+    void shouldConvertCategoria_inCategoriaModel() {
 
-        Video video = VideoExample.getInstance();
-        VideoModel videoModel = assembler.toModel(video);
-        assertValues(video, videoModel);
+        Categoria categoria = CategoriaExample.getInstance();
+        CategoriaModel categoriaModel = assembler.toModel(categoria);
+        assertValues(categoria, categoriaModel);
         
     }
 
-    void shouldConvertVideoList_inVideoModelList() {
+    @Test
+    void shouldConvertCategoriaList_inCategoriaModelList() {
 
         int max = 10;
-        List<Video> videoList = new ArrayList<>();
+        List<Categoria> categoriaList = new ArrayList<>();
         
         for(int i = 0; i < max; i++) {
-            Video video = VideoExample.getInstance();
-            videoList.add(video);            
+            Categoria categoria = CategoriaExample.getInstance();
+            categoriaList.add(categoria);            
         }
 
-        List<VideoModel> videoModelList = assembler.toListModel(videoList);
+        List<CategoriaModel> categoriaModelList = assembler.toListModel(categoriaList);
 
         for(int i = 0; i < max; i++) {
-            assertValues(videoList.get(i), videoModelList.get(i));
+            assertValues(categoriaList.get(i), categoriaModelList.get(i));
         }
 
     }
 
-    private void assertValues(Video video, VideoModel videoModel) {
-        assertEquals(video.getId(), videoModel.getId());
-        assertEquals(video.getTitulo(), videoModel.getTitulo());
-        assertEquals(video.getDescricao(), videoModel.getDescricao());
-        assertEquals(video.getUrl(), videoModel.getUrl());
+    private void assertValues(Categoria categoria, CategoriaModel categoriaModel) {
+        assertEquals(categoria.getId(), categoriaModel.getId());
+        assertEquals(categoria.getTitulo(), categoriaModel.getTitulo());
+        assertEquals(categoria.getCor(), categoriaModel.getCor());
     }
 
 }

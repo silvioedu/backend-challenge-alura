@@ -5,12 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class VideoModel {
+public class CategoriaModel {
 
     private Long id;
     private String titulo;
-    private String descricao;
-    private String url;
-    private Long categoriaId;
-
+    private String cor;
 }

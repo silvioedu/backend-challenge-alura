@@ -1,6 +1,6 @@
 package com.alura.aluraflix.domain.service;
 
-import com.alura.aluraflix.domain.exception.VideoNotFoundException;
+import com.alura.aluraflix.domain.exception.notfound.VideoNotFoundException;
 import com.alura.aluraflix.domain.model.Video;
 import com.alura.aluraflix.domain.repository.VideoRepository;
 
@@ -12,6 +12,9 @@ public class VideoService {
     
     @Autowired
     private VideoRepository repository;
+
+    @Autowired
+    private CategoriaService categoriaService;
  
     public Video findOrFail(Long id){
         return repository.findById(id)
@@ -19,6 +22,7 @@ public class VideoService {
     }
 
     public Video save(Video video) {
+        video.setCategoria(categoriaService.findOrFail(video.getCategoria().getId()));
         return repository.save(video);
     }
 

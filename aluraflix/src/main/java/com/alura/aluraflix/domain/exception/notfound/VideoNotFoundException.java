@@ -1,6 +1,6 @@
-package com.alura.aluraflix.domain.exception;
+package com.alura.aluraflix.domain.exception.notfound;
 
-public class VideoNotFoundException extends RuntimeException {
+public class VideoNotFoundException extends EntityNotFoundException {
  
     private static final String NOT_FOUND_MSG = "Vídeo %d não encontrado.";
 

@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,8 +11,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-public class Video {
-    
+public class Categoria {
+ 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,23 +20,15 @@ public class Video {
 
     private String titulo;
 
-    private String descricao;
+    private String cor;
 
-    private String url;
-
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
-    
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", titulo='" + getTitulo() + "'" +
-            ", descricao='" + getDescricao() + "'" +
-            ", url='" + getUrl() + "'" +
+            ", cor='" + getCor() + "'" +
             "}";
     }
-    
-}
 
+}

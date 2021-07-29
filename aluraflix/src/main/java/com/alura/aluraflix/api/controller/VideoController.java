@@ -1,6 +1,7 @@
 package com.alura.aluraflix.api.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,8 +42,11 @@ public class VideoController {
     private VideoInputDisassembler disassembler;
 
     @GetMapping
-    public List<VideoModel> findAll() {
-        return assembler.toListModel(repository.findAll()); 
+    public List<VideoModel> findAll(@RequestParam(required = false) String search) {
+        return assembler.toListModel(
+            Objects.isNull(search) ? 
+            repository.findAll() : 
+            repository.findByTituloContains(search)); 
     }
 
     @GetMapping("/{id}")
@@ -69,4 +74,5 @@ public class VideoController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }
