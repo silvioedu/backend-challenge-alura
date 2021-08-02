@@ -81,4 +81,8 @@ public class VideoController {
         service.delete(id);
     }
 
+    @GetMapping("/free")
+    public List<VideoModel> findFree() {
+        return assembler.toListModel(repository.findFirst5By());
+    }
 }

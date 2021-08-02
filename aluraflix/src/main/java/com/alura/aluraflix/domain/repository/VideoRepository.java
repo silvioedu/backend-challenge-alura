@@ -22,4 +22,6 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
            " GROUP BY c.titulo " + 
            " ORDER BY 2 DESC ")
     List<CategoriaVideoModel> findAllVideosByCategoria();
+
+    List<Video> findFirst5By();
 }
