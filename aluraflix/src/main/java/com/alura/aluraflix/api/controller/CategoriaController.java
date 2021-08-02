@@ -8,10 +8,15 @@ import com.alura.aluraflix.api.assembler.CategoriaModelAssembler;
 import com.alura.aluraflix.api.disassembler.CategoriaInputDisassembler;
 import com.alura.aluraflix.api.input.CategoriaInput;
 import com.alura.aluraflix.api.model.CategoriaModel;
+import com.alura.aluraflix.domain.model.Categoria;
 import com.alura.aluraflix.domain.repository.CategoriaRepository;
 import com.alura.aluraflix.domain.service.CategoriaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +45,10 @@ public class CategoriaController {
     private CategoriaInputDisassembler disassembler;
 
     @GetMapping
-    public List<CategoriaModel> findAll() {
-        return assembler.toListModel(categoriaRepository.findAll()); 
+    public Page<CategoriaModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
+        Page<Categoria> categoriaPage = categoriaRepository.findAll(pageable);
+        List<CategoriaModel> categoriaModelList = assembler.toListModel(categoriaPage.getContent());
+        return new PageImpl<>(categoriaModelList, pageable, categoriaPage.getTotalElements()); 
     }
 
     @GetMapping("/{id}")

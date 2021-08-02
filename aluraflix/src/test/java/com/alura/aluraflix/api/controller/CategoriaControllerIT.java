@@ -132,7 +132,7 @@ class CategoriaControllerIT {
     @Test
     void shouldReturn204_WhenReceiveDELETE_withValidId(){
 
-        int id = 5;
+        int id = 9;
 
         RestAssured
             .given()
@@ -168,7 +168,7 @@ class CategoriaControllerIT {
     @Test
     void shouldReturn409_WhenReceiveDELETE_withInUseId(){
 
-        int id = 1;
+        int id = 5;
 
         RestAssured
             .given()

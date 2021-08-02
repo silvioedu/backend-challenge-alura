@@ -6,13 +6,15 @@ import com.alura.aluraflix.api.model.CategoriaVideoModel;
 import com.alura.aluraflix.domain.model.Categoria;
 import com.alura.aluraflix.domain.model.Video;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 public interface VideoRepository extends JpaRepository<Video, Long> {
     
-    List<Video> findByCategoria(Categoria categoria);
+    Page<Video> findByCategoria(Categoria categoria, Pageable pageable);
 
-    List<Video> findByTituloContains(String titulo);
+    Page<Video> findByTituloContains(String titulo, Pageable pageable);
 
     @Query("SELECT " + 
            "  new com.alura.aluraflix.api.model.CategoriaVideoModel(c.titulo, count(v.id)) " +

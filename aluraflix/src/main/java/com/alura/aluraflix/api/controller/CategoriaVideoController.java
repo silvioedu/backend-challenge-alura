@@ -9,6 +9,10 @@ import com.alura.aluraflix.domain.repository.VideoRepository;
 import com.alura.aluraflix.domain.service.CategoriaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +32,10 @@ public class CategoriaVideoController {
     private VideoModelAssembler videoAssembler;
 
     @GetMapping
-    public List<VideoModel> findVideosByCategoriaId(@PathVariable Long id){
+    public Page<VideoModel> findVideosByCategoriaId(@PathVariable Long id, @PageableDefault(size = 5) Pageable pageable){
         var categoria = categoriaService.findOrFail(id);
-        List<Video> videos = videoRepository.findByCategoria(categoria);
-        return videoAssembler.toListModel(videos);
+        Page<Video> videoPage = videoRepository.findByCategoria(categoria, pageable);
+        List<VideoModel> videoModelList = videoAssembler.toListModel(videoPage.getContent());
+        return new PageImpl<>(videoModelList, pageable, videoPage.getTotalElements());
     }
 }

@@ -9,10 +9,15 @@ import com.alura.aluraflix.api.assembler.VideoModelAssembler;
 import com.alura.aluraflix.api.disassembler.VideoInputDisassembler;
 import com.alura.aluraflix.api.input.VideoInput;
 import com.alura.aluraflix.api.model.VideoModel;
+import com.alura.aluraflix.domain.model.Video;
 import com.alura.aluraflix.domain.repository.VideoRepository;
 import com.alura.aluraflix.domain.service.VideoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +47,12 @@ public class VideoController {
     private VideoInputDisassembler disassembler;
 
     @GetMapping
-    public List<VideoModel> findAll(@RequestParam(required = false) String search) {
-        return assembler.toListModel(
-            Objects.isNull(search) ? 
-            repository.findAll() : 
-            repository.findByTituloContains(search)); 
+    public Page<VideoModel> findAll(@RequestParam(required = false) String search, @PageableDefault(size = 5) Pageable pageable) {
+        Page<Video> videoPage = Objects.isNull(search) ? 
+            repository.findAll(pageable) : 
+            repository.findByTituloContains(search, pageable);
+        List<VideoModel> videoModelList = assembler.toListModel(videoPage.getContent());
+        return new PageImpl<>(videoModelList, pageable, videoPage.getTotalPages());
     }
 
     @GetMapping("/{id}")

@@ -69,10 +69,11 @@ class VideoControllerIT {
             .then()
                 .statusCode(HttpStatus.OK.value())
                 .body("id", equalTo(id))
-                .body("titulo", equalTo("Video 001"))
-                .body("descricao", equalTo("Descrição do vídeo 001"))
-                .body("url", equalTo("http://video001.com"));
-
+                .body("titulo", equalTo("Um sonho de liberdade"))
+                .body("descricao", equalTo("Condenado por assassinato, o banqueiro Andy Dufresne vai para a prisão, desenvolve uma forte amizade com um preso mais velho e aprende a navegar o duro clima da prisão."))
+                .body("url", equalTo("https://www.netflix.com/title/70005379"))
+                .body("categoriaId", equalTo(2));
+                
     }
 
     @Test
