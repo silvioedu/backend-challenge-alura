@@ -11,3 +11,6 @@ https://trello.com/b/Mj5x6lMZ/alura-challenge-backend-semana-1
 
 - Semana 2:
 https://trello.com/b/5DavhAH7/alura-challenge-backend-semana-2
+
+- Semana 3:
+https://www.alura.com.br/challenges/back-end/semana-03-04-autenticacao-deploy
